@@ -1,0 +1,31 @@
+name: ant
+version: "1.0"
+summary: test ant build
+description: |
+ Test ant build
+
+confinement: classic
+grade: devel
+base: core18
+
+apps:
+  ant:
+    command: bin/ant
+
+parts:
+  ant:
+    plugin: maven
+    maven-openjdk-version: "11"
+    maven-options:
+      - -DskipTests
+    source: https://github.com/apache/ant.git
+    build-environment:
+      - JAVA_HOME: "/usr/lib/jvm/java-11-openjdk-amd64"
+    build-packages: ["maven"]
+    override-build: |
+      ./bootstrap.sh
+      #./build.sh
+      #mvn -f src/etc/poms/pom.xml -DskipTests package
+      #rm -rf bootstrap build dist distribution java-repository target
+      ./build.sh dist-lite
+      cp -ar dist/* $SNAPCRAFT_PART_INSTALL/

@@ -1,0 +1,22 @@
+name: ant
+version: "1.0"
+summary: test ant build from tarball
+description: |
+ Test ant build
+
+confinement: classic
+grade: devel
+base: core18
+
+apps:
+  ant:
+    command: bin/ant
+
+parts:
+  ant:
+    plugin: dump
+    source: "https://archive.apache.org/dist/ant/binaries/apache-ant-1.10.5-bin.tar.bz2"
+    source-checksum: "sha512/a7f1e0cec9d5ed1b3ab6cddbb9364f127305a997bbc88ecd734f9ef142ec0332375e01ace3592759bb5c3307cd9c1ac0a78a30053f304c7030ea459498e4ce4e"
+    build-environment:
+      - JAVA_HOME: "/usr/lib/jvm/java-11-openjdk-amd64"
+    stage-packages: ["openjdk-11-jre-headless"]

@@ -1,0 +1,19 @@
+name: ant-hello
+version: "1.0"
+summary: test the ant plugin
+description: |
+ Verify the correct behavior of the plugin.
+base: core18
+
+confinement: strict
+grade: devel
+
+apps:
+  ant-hello:
+    command: bin/java -cp $SNAP/jar/HelloWorld.jar oata.HelloWorld
+
+parts:
+  ant:
+    source: .
+    plugin: ant
+    ant-openjdk-version: "11"
